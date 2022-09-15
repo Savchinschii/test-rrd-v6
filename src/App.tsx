@@ -18,13 +18,33 @@ function App() {
     <div className="App">
       <NavLink to={'/'}>main</NavLink>---
       <NavLink to={'/login'}>login</NavLink>---
-      <NavLink to={'/profile'}>profile</NavLink>---
-      <NavLink to={'/profile/1'}>profile/1</NavLink>
+      <NavLink
+          to={'/profile'}
+          style={(params) => {
+              return {color: params.isActive ? 'red' : 'black'}
+          }}
+      >
+          profile
+      </NavLink>---
+      <NavLink
+          to={'/profile/settings'}
+          className={({isActive}) =>  isActive ? 'act' : 'def'  }
+      >
+          settings
+      </NavLink>---
+        <a
+            href="https://github.com/Savchinschii"
+            target={'_blank'}
+            rel={'noreferrer nofollow noopener'}
+        >
+            xxx
+        </a>
       <Routes>
         <Route path={'/*'} element={<div>404</div>}/>
         <Route path={'/'} element={<div>main</div>}/>
         <Route path={'/login'} element={<div>login</div>}/>
-        <Route path={'/profile/:id'} element={<Profile/>}/>
+        <Route path={'/profile/'} element={<div>profile</div>}/>
+        <Route path={'/profile/settings'} element={<div>settings</div>}/>
       </Routes>
     </div>
   );
