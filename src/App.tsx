@@ -1,53 +1,40 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
-import {NavLink, Route, Routes, useParams} from "react-router-dom";
+import {Navigate, NavLink, Route, Routes, useNavigate} from "react-router-dom";
 
 
 const Profile = () => {
-    const params = useParams<'id'>()
+    const navigate = useNavigate()
 
-    const some = params.id
+    // useEffect(() => {
+    //     if (true) navigate('/login')
+    // }, [])
 
-    console.log(some)
-
-    return <div>profile</div>
+    return (
+        <div>
+            <Navigate to={'/login'}/>
+            profile
+            <button onClick={() => {navigate('/login')}}>logout</button>
+        </div>
+    )
 }
 
 function App() {
-  return (
-    <div className="App">
-      <NavLink to={'/'}>main</NavLink>---
-      <NavLink to={'/login'}>login</NavLink>---
-      <NavLink
-          to={'/profile'}
-          style={(params) => {
-              return {color: params.isActive ? 'red' : 'black'}
-          }}
-      >
-          profile
-      </NavLink>---
-      <NavLink
-          to={'/profile/settings'}
-          className={({isActive}) =>  isActive ? 'act' : 'def'  }
-      >
-          settings
-      </NavLink>---
-        <a
-            href="https://github.com/Savchinschii"
-            target={'_blank'}
-            rel={'noreferrer nofollow noopener'}
-        >
-            xxx
-        </a>
-      <Routes>
-        <Route path={'/*'} element={<div>404</div>}/>
-        <Route path={'/'} element={<div>main</div>}/>
-        <Route path={'/login'} element={<div>login</div>}/>
-        <Route path={'/profile/'} element={<div>profile</div>}/>
-        <Route path={'/profile/settings'} element={<div>settings</div>}/>
-      </Routes>
-    </div>
-  );
+    return (
+        <div className="App">
+            <NavLink to={'/'}>main</NavLink>---
+            <NavLink to={'/login'}>login</NavLink>---
+            <NavLink to={'/profile'}>profile</NavLink>---
+            <NavLink to={'/profile/settings'}>settings</NavLink>---
+            <Routes>
+                <Route path={'/*'} element={<div>404</div>}/>
+                <Route path={'/'} element={<div>main</div>}/>
+                <Route path={'/login'} element={<div>login</div>}/>
+                <Route path={'/profile/'} element={<Profile/>}/>
+                <Route path={'/profile/settings'} element={<div>settings</div>}/>
+            </Routes>
+        </div>
+    );
 }
 
 export default App;
